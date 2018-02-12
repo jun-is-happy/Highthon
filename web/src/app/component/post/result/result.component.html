@@ -1,0 +1,49 @@
+<header class="main-header">
+  <div class="containers" id="header-container">
+    <a href="http://localhost:4200/home">
+      <img id="header-logo" src="/assets/img/main-logo.png">
+    </a>
+    <ul class="header-ul">
+      <li class="header-ul-li">
+        <input class="search-input" type="text" [(ngModel)]="filter.message" placeholder="search">
+        <span class="input-group-addon">
+          <button type="submit">
+            <span class="glyphicon glyphicon-search"></span>
+          </button>
+        </span>
+      </li>
+      <li class="header-ul-li">
+        <img class="profile" [src]="imageUrl">
+      </li>
+    </ul>
+  </div>
+</header>
+<div class="box">
+  <div *ngFor="let item of result | filter:filter" class="card">
+    <div class="container">
+
+      <div class='left-box'>
+        <img *ngIf="item.picture" class="fullpicture" [src]="item.picture">
+        <br>
+        <span *ngIf="item.message">{{item.message}}</span>
+        <br>
+        <span style="margin-bottom:20px; font-weight:bold;" *ngIf="item.story">{{item.story}}</span>
+      </div>
+      <div (click)="checkPercentage(item.message)" class='right-box'>
+        <img class="fullpicture" style="transform: scale(0.7); margin-left:-15px;" src="/assets/img/score.png">
+        <div *ngIf="item.message" class="image">{{item.score}}점</div>
+      </div>
+    </div>
+
+    <div style="border-top:1px solid #000000; clear:both; height:30px; text-align:center; padding-top:10px;">
+      <a style="padding-top:10px;font-weight:bold; vertical-align:middle; color:#6950B9;" (click)="goFacebook(item.id)">페이스북으로 이동</a>
+    </div>
+  </div>
+
+  <div class="fab">
+    <span class="fab-action-button">
+      <i (click)="openModal()" class="fab-action-button__icon">
+      </i>
+    </span>
+  </div>
+</div>
